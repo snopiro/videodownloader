@@ -3,4 +3,4 @@
 ###########################################
 
 
-exec(open("javgurudownloader.py").read())
+exec(open("javguru_downloader.py").read())
