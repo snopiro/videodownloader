@@ -107,7 +107,7 @@ ffmpeg_command = [
 ]
 
 # Execute the ffmpeg command
-subprocess.run
+subprocess.run(ffmpeg_command)
 
 # Clean up loose segment files
 for ts_file in ts_files:
