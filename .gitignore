@@ -5,3 +5,4 @@ request.txt
 javguru_curl_extractor_uipclass.py
 javguru_curl_extractor_sel.py
 url
+__pycache__/*
