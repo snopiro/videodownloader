@@ -5,7 +5,7 @@ import re
 import threading
 
 def download_segment(segment_number, end_event):
-    segment_url = url.replace("seg-1", f"seg-{segment_number}")
+    segment_url = url.replace("seg-2", f"seg-{segment_number}")
     print("Downloading: " + segment_url)
     response = requests.get(segment_url, headers=headers)
 
