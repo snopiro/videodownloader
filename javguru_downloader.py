@@ -1,7 +1,6 @@
 import os
 import subprocess
 import requests
-import re
 import threading
 
 def download_segment(segment_number, end_event):
@@ -10,7 +9,7 @@ def download_segment(segment_number, end_event):
     response = requests.get(segment_url, headers=headers)
 
     if response.status_code == 200:
-        file_path = os.path.join(download_directory, f'segment_{segment_number}.ts')
+        file_path = os.path.join(download_directory, f's{segment_number}.ts')
         with open(file_path, 'wb') as file:
             file.write(response.content)
         print(f'Segment {segment_number} downloaded successfully.')
@@ -41,7 +40,7 @@ headers = {
     "sec-ch-ua-platform": '"Windows"',
 }
 
-download_directory = "./downloaded_files"
+download_directory = ".\d"
 os.makedirs(download_directory, exist_ok=True)
 
 # Download the files using threading
@@ -78,14 +77,14 @@ for thread in threads:
 print("All segments downloaded!")
 
 # Combine the downloaded files using FFmpeg
-output_directory = "./combined_video"
+output_directory = ".\combined_video"
 os.makedirs(output_directory, exist_ok=True)
 
 i = 1
 ts_files = []
 
 while True:
-    ts_filename = f"segment_{i}.ts"
+    ts_filename = f"s{i}.ts"
     ts_filepath = os.path.join(download_directory, ts_filename)
 
     # Check if the .ts file exists
@@ -96,7 +95,7 @@ while True:
     i += 1
 
 # Set the output file path
-output_filepath = os.path.join(output_directory, "joined_video.mp4")
+output_filepath = os.path.join(output_directory, "Video.mp4")
 
 # Prepare the ffmpeg command
 ffmpeg_command = [
