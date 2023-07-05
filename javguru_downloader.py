@@ -22,22 +22,24 @@ def download_segment(segment_number, end_event):
 
 # Read the URL and headers from the file
 with open("request.txt", "r") as file:
-    curl_command = file.read()
+    url = file.read()
 
-url = re.search(r'curl "(.*?)"', curl_command)
-headers = dict(re.findall(r'-H "(.*?): (.*?)"', curl_command))
+print("URL: " + url)
 
-if url is None:
-    print("URL not found in the file.")
-else:
-    url = url.group(1)
-    print("URL:", url)
-    print("Headers:")
-    for key, value in headers.items():
-        print(key + ":", value)
-
-print("Headers:")
-print(headers)
+headers = {
+    "Accept": "*/*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Connection": "keep-alive",
+    "Origin": "https://javplaya.com",
+    "Referer": "https://javplaya.com/",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "cross-site",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+    "sec-ch-ua": '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+}
 
 download_directory = "./downloaded_files"
 os.makedirs(download_directory, exist_ok=True)
@@ -45,7 +47,7 @@ os.makedirs(download_directory, exist_ok=True)
 # Download the files using threading
 segment_number = 1
 threads = []
-max_threads = 10  # Maximum number of simultaneous downloads
+max_threads = 5  # Maximum number of simultaneous downloads
 
 end_event = threading.Event()  # Event to signal the end of segments
 
